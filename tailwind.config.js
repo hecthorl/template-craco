@@ -36,7 +36,8 @@ module.exports = {
          // },
          animation: {
             fading: 'fade-in-down 0.8s ease',
-            fadingout: 'fade-up-out 0.8s ease',
+            // fadingout: 'fade-up-out 0.8s ease',
+            switching: 'fade-in-left 0.8 ease',
          },
          keyframes: {
             'fade-in-down': {
@@ -49,16 +50,24 @@ module.exports = {
                   transform: 'translateY(0)',
                },
             },
-            'fade-up-out': {
+            'fade-in-left': {
                from: {
-                  opacity: 1,
+                  transform: 'translate3d(-100%, 0, 0)',
                },
-
                to: {
-                  opacity: 1,
-                  transform: 'translateY(-100%)',
+                  transform: 'translate3d(0, 0, 0)',
                },
             },
+            // 'fade-up-out': {
+            //    from: {
+            //       opacity: 1,
+            //    },
+
+            //    to: {
+            //       opacity: 1,
+            //       transform: 'translateY(-100%)',
+            //    },
+            // },
          },
 
          boxShadow: {
@@ -67,6 +76,7 @@ module.exports = {
          minHeight: {
             '1/2': '50%',
             '1/3': '33.3%',
+            56: '56px',
          },
          maxWidth: {
             custom: '600px',

@@ -8,7 +8,7 @@ const LoginBtn = () => {
    return (
       <button
          onClick={openModalLogin}
-         className="inline-flex bg-gray-800 py-1 px-3 focus:outline-none hover:bg-gray-600 rounded text-base mt-4 md:mt-0 md:ml-4"
+         className="inline bg-gray-800 py-1 px-3 focus:outline-none hover:bg-gray-600 rounded text-base mt-4 md:mt-0 md:ml-4"
       >
          Login
       </button>

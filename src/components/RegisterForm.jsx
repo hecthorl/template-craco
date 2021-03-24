@@ -1,20 +1,19 @@
 import { useFormik } from 'formik';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { useHistory } from 'react-router';
 
 import * as Yup from 'yup';
 import UserContext from '../context/UserContext';
-import { register } from '../helpers/google/register';
+import { register } from '../helpers/auth-firebase/register';
 import validations from '../helpers/validations';
 
 const RegisterForm = () => {
    const history = useHistory();
    const [loading, setLoading] = useState(false);
    const { handlerModal } = useContext(UserContext);
+
    const { openModalLogin, closeModal } = handlerModal;
 
-   // const history = useHistory();
    const formik = useFormik({
       initialValues: {
          email: '',
@@ -31,17 +30,14 @@ const RegisterForm = () => {
          passwordConfirm: Yup.string()
             .required('Required')
             .oneOf([Yup.ref('password'), null], 'Contraseñas no coinciden'),
-         // .equals(password, 'Contraseñas no coinciden'),
       }),
       onSubmit: async values => {
-         //hacer lo que quiera con los valores
          setLoading(true);
+
          const { email, password } = values;
 
          try {
             await register(email, password);
-            // const { user } = await register(email, password);
-            // history.pushState(user, 'usraui', '/profile');
 
             // const { email: correo, uid, emailVerified, photoURL } = user;
             // const currentUser = {
@@ -69,11 +65,12 @@ const RegisterForm = () => {
    const handlerLoading = loading
       ? 'inline-block disabled:opacity-50'
       : 'hidden';
+   const handlerCursor = loading ? 'cursor-not-allowed' : '';
 
    return (
       <form
          onSubmit={formik.handleSubmit}
-         className="flex flex-col pb-3 w-full px-5 md:max-w-md lg:max-w-lg xl:max-w-2xl"
+         className="flex flex-col pb-3 w-full px-5 md:max-w-md lg:max-w-lg xl:max-w-2xl transition duration-150 ease-in-out"
          noValidate
       >
          <h1 className="text-center font-semibold text-gray-900 py-5 md:text-5xl text-4xl md:py-6">
@@ -135,7 +132,7 @@ const RegisterForm = () => {
          <button
             disabled={loading}
             type="submit"
-            className="bg-gray-600 rounded-md text-xl w-full focus:outline-none hover:bg-gray-700 py-1 font-semibold text-gray-200"
+            className={`bg-gray-600 rounded-md text-xl w-full focus:outline-none hover:bg-gray-700 py-1 font-semibold text-gray-200 ${handlerCursor}`}
          >
             <svg
                className={`${handlerLoading} animate-spin mr-1 h-5 w-5 text-white`}
@@ -165,7 +162,7 @@ const RegisterForm = () => {
                Ya tienes una cuenta?,
                <button
                   onClick={openModalLogin}
-                  className="hover:underline hover:text-gray-200 cursor-pointer ml-1"
+                  className="hover:underline focus:outline-none hover:text-gray-200 cursor-pointer ml-1"
                >
                   Login
                </button>

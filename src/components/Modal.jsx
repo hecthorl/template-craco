@@ -8,7 +8,7 @@ const Modal = () => {
    const { handlerModal } = useContext(UserContext);
    const { isOpenModal, closeModal } = handlerModal;
 
-   console.log(isOpenModal);
+   // console.log(isOpenModal);
 
    const modalSelector = () => {
       if (isOpenModal.tipo === 'login') return <LoginForm />;
@@ -22,7 +22,7 @@ const Modal = () => {
    return (
       <div
          onClick={closeModal}
-         className={`${modalToggleCSS()} fixed top-0 h-screen w-screen backdrop-blur text-2xl`}
+         className={`${modalToggleCSS()} z-50 fixed top-0 h-screen w-screen backdrop-blur text-2xl`}
       >
          <div className="h-screen w-screen p-3">
             <div

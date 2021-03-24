@@ -11,7 +11,11 @@ const firebaseConfig = {
 };
 
 const app = firebase.initializeApp(firebaseConfig);
-// firebase.auth().useDeviceLanguage();
-//comentado, deberia mostrar la interfaz de login en ingles
+
+/**
+ * firebase.auth().useDeviceLanguage();
+ * comentado, deberia mostrar la interfaz de login con
+ * cualquier red social en ingles
+ */
 
 export default firebase.auth(app);

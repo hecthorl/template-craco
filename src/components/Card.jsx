@@ -106,23 +106,3 @@ const Card = () => {
 };
 
 export default Card;
-/**
- *    <div classNameName="md:bg-pink-200 bg-pink-200 max-w-custom lg:w-1/4 rounded-lg h-auto shadow-3xl">
-         <img
-            src="https://i.picsum.photos/id/892/600/300.jpg?hmac=edJ_RFuf-o1manb6FcYmStXK-htcPKQ0D5ewHkQWPNU"
-            classNameName="mx-auto max-w-full min-h-1/3 rounded-t-lg"
-            alt="img"
-         />
-         <div classNameName="px-5 pb-6 max-h-full">
-            <h2 classNameName="py-3 text-3xl font-akaya text-gray-900 font-bold">
-               Una imagen!
-            </h2>
-            <p classNameName="text-xl text-gray-800 text-justify">
-               Lorem ipsum dolor, sit amet consectetur adipisicing elit. At
-               magnam nostrum odio hic esse repellendus cumque sit facilis nam
-               consectetur omnis aut nobis odit perferendis sequi quis,
-               molestias fuga culpa!
-            </p>
-         </div>
-      </div>
- */

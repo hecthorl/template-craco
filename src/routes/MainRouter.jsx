@@ -8,6 +8,9 @@ import Profile from '../pages/Profile';
 import useModal from '../hooks/useModal';
 import Navbar from '../components/Navbar';
 import { useEffect, useState } from 'react';
+import PrivateRoute from './PrivateRoute';
+import Settings from '../pages/Settings';
+import About from '../pages/About';
 
 function MainRouter() {
    const [currentUser, setCurrentUser] = useState(null);
@@ -16,9 +19,9 @@ function MainRouter() {
    useEffect(() => {
       auth.onAuthStateChanged(user => {
          setCurrentUser(user);
-         console.log(user);
+         // console.log(user);
       });
-      console.log(auth.currentUser);
+      // auth.currentUser.updateEmail()
    }, []);
 
    const data = {
@@ -32,7 +35,9 @@ function MainRouter() {
             <Navbar />
             <Switch>
                <Route exact path="/" component={Home} />
-               <Route exact path="/profile" component={Profile} />
+               <PrivateRoute exact path="/profile" component={Profile} />
+               <PrivateRoute exact path="/settings" component={Settings} />
+               <Route exact path="/about" component={About} />
                <Route path="*" component={ErrorPage} />
             </Switch>
          </Router>

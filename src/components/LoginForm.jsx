@@ -3,12 +3,14 @@ import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import * as Yup from 'yup';
 import UserContext from '../context/UserContext';
-import login from '../helpers/google/login';
+import login from '../helpers/auth-firebase/login';
 import validations from '../helpers/validations';
 
 const LoginForm = () => {
    const [loading, setLoading] = useState(false);
+
    const history = useHistory();
+
    const { handlerModal } = useContext(UserContext);
 
    const { openModalRegister, closeModal } = handlerModal;
@@ -41,15 +43,17 @@ const LoginForm = () => {
          }
       },
    });
+
    const handlerLoading = loading
       ? 'inline-block disabled:opacity-50'
       : 'hidden';
    const handlerCursor = loading ? 'cursor-not-allowed' : '';
+
    return (
       <form
          onSubmit={formik.handleSubmit}
          noValidate
-         className="flex flex-col pb-3 w-full px-5 md:max-w-md lg:max-w-lg xl:max-w-2xl"
+         className={`transition duration-150 ease-in-out flex flex-col pb-3 w-full px-5 md:max-w-md lg:max-w-lg xl:max-w-2xl`}
       >
          <h1 className="text-center font-semibold text-gray-900 py-5 md:text-5xl text-4xl md:py-6">
             Login
@@ -94,7 +98,7 @@ const LoginForm = () => {
             className={`bg-gray-600 rounded-md text-xl w-full focus:outline-none hover:bg-gray-700 py-1 font-semibold text-gray-200 ${handlerCursor}`}
          >
             <svg
-               className={`${handlerLoading} animate-spin  mr-1 h-5 w-5 text-white`}
+               className={`${handlerLoading} animate-spin mr-1 h-5 w-5 text-white`}
                xmlns="http://www.w3.org/2000/svg"
                fill="none"
                viewBox="0 0 24 24"
@@ -114,14 +118,13 @@ const LoginForm = () => {
                ></path>
             </svg>
             Send
-            {/* <span className="ml-2">Send</span> */}
          </button>
          <div className="text-base text-center">
             <p>
                Doesn't have an account?,
                <button
                   onClick={openModalRegister}
-                  className="hover:underline hover:text-gray-200 cursor-pointer ml-1"
+                  className="hover:underline hover:text-gray-200 cursor-pointer ml-1 focus:outline-none"
                >
                   Register
                </button>

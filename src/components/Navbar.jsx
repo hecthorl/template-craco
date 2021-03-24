@@ -1,4 +1,5 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
+import { FaHamburger } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import UserContext from '../context/UserContext';
 import LoginBtn from './LoginBtn';
@@ -7,8 +8,9 @@ import RegisterBtn from './RegisterBtn';
 
 const Navbar = () => {
    const { currentUser } = useContext(UserContext);
+   const [toggleMenu, setToggleMenu] = useState(false);
 
-   const btns = () => {
+   const buttons = () => {
       return currentUser ? (
          <LogoutBtn />
       ) : (
@@ -19,32 +21,48 @@ const Navbar = () => {
    };
 
    return (
-      <header className="text-gray-400 bg-gray-700 sticky top-0 body-font">
-         <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-            <div className="flex title-font font-medium items-center text-white mb-4 md:mb-0">
-               <span className="ml-3 text-xl">
-                  {currentUser ? currentUser.email : 'Welcome'}
-               </span>
+      <div className="bg-gray-300 p-1 sticky top-0 md:flex md:px-5 md:h-14 z-40">
+         <div className="flex justify-between px-2 pt-1">
+            <div>
+               <span className="text-xl md:text-3xl">Welcome</span>
             </div>
-            <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
-               <ul className="space-y-2 md:space-x-3 md:inline-flex h-full">
-                  <li className="hover:text-white mt-2">
-                     <NavLink exact to="/profile">
-                        Profile
-                     </NavLink>
-                  </li>
-                  <li className="hover:text-white">
-                     <NavLink exact to="/">
-                        Home
-                     </NavLink>
-                  </li>
-                  <li className="hover:text-white">Third Link</li>
-                  <li className="hover:text-white">Fourth Link</li>
-               </ul>
-            </nav>
-            {btns()}
+            <FaHamburger
+               className="text-xl m-0 md:hidden my-2"
+               onClick={() => setToggleMenu(!toggleMenu)}
+            />
          </div>
-      </header>
+
+         <div
+            className={`${
+               toggleMenu ? 'flex' : 'hidden'
+            } flex-col justify-center items-center w-full md:flex md:flex-row md:justify-end`}
+         >
+            <ul className="md:flex-row md:flex  md:items-center md:space-x-3">
+               <li onClick={() => setToggleMenu(!toggleMenu)}>
+                  <NavLink exact to="/profile">
+                     Profile
+                  </NavLink>
+               </li>
+               <li onClick={() => setToggleMenu(!toggleMenu)}>
+                  <NavLink exact to="/">
+                     Home
+                  </NavLink>
+               </li>
+               <li onClick={() => setToggleMenu(!toggleMenu)}>
+                  <NavLink exact to="/settings">
+                     Settings
+                  </NavLink>
+               </li>
+               <li onClick={() => setToggleMenu(!toggleMenu)}>
+                  <NavLink exact to="/about">
+                     About
+                  </NavLink>
+               </li>
+            </ul>
+
+            <div>{buttons()}</div>
+         </div>
+      </div>
    );
 };
 
