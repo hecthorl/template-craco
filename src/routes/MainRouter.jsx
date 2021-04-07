@@ -4,7 +4,6 @@ import UserContext from '../context/UserContext';
 import ErrorPage from '../pages/ErrorPage';
 import Home from '../pages/Home';
 import Profile from '../pages/Profile';
-
 import useModal from '../hooks/useModal';
 import Navbar from '../components/Navbar';
 import { useEffect, useState } from 'react';
@@ -19,9 +18,7 @@ function MainRouter() {
    useEffect(() => {
       auth.onAuthStateChanged(user => {
          setCurrentUser(user);
-         // console.log(user);
       });
-      // auth.currentUser.updateEmail()
    }, []);
 
    const data = {

@@ -24,7 +24,11 @@ const Navbar = () => {
       <div className="bg-gray-300 p-1 sticky top-0 md:flex md:px-5 md:h-14 z-40">
          <div className="flex justify-between px-2 pt-1">
             <div>
-               <span className="text-xl md:text-3xl">Welcome</span>
+               <span className="text-xl md:text-3xl">
+                  {currentUser
+                     ? currentUser.displayName || currentUser.email
+                     : 'welcome'}
+               </span>
             </div>
             <FaHamburger
                className="text-xl m-0 md:hidden my-2"
